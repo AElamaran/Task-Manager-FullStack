@@ -1,0 +1,65 @@
+services:
+  # MariaDB Database
+  mariadb:
+    image: mariadb:10.11
+    container_name: todo-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: todo
+      MYSQL_USER: todouser
+      MYSQL_PASSWORD: todopassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
+    networks:
+      - todo-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Backend Service
+  backend:
+    build:
+      context: ./Todo-Backend
+      dockerfile: Dockerfile
+    container_name: todo-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/todo
+      SPRING_DATASOURCE_USERNAME: todouser
+      SPRING_DATASOURCE_PASSWORD: todopassword
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+    ports:
+      - "8080:8080"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./todo-frontend
+      dockerfile: Dockerfile
+    container_name: todo-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+volumes:
+  mariadb_data:
+
+networks:
+  todo-network:
+    driver: bridge

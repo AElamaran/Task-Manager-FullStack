@@ -59,10 +59,24 @@ A full-stack Task Manager app with a React frontend, Spring Boot backend, and Ma
 
 ---
 
-## Services & Ports
-- **Frontend:** React + Vite (port 3000)
-- **Backend:** Spring Boot (port 8080)
-- **Database:** MariaDB (port 3307 on host)
+## Application Functionalities
+- Create, read, update, and delete tasks (CRUD operations)
+- View all tasks in a list
+- Search and filter tasks
+- Responsive UI for desktop and mobile
+- API documentation available via Swagger UI
+
+---
+
+## Future Improvements
+- Add user authentication and authorization
+  - Implement basic authentication for simple user login
+  - Add token-based authentication (JWT) for secure API access
+- Allow users to register and manage their own tasks
+- Add user roles (admin, user) for access control
+- Improve error handling and validation
+- Add notifications or reminders for tasks
+- Enhance UI/UX with more features and polish
 
 ---
 

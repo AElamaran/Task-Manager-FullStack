@@ -29,7 +29,8 @@ A full-stack Task Manager app with a React frontend, Spring Boot backend, and Ma
   ```sh
   cd todo-frontend
   npm install
-  npm test
+  npm test or npx jest
+
   ```
 
 ### Backend
@@ -37,7 +38,8 @@ A full-stack Task Manager app with a React frontend, Spring Boot backend, and Ma
 - To run backend tests:
   ```sh
   cd Todo-BAckend
-  ./mvnw test
+  ./mvnw test or mvn test
+
   ```
 
 ---

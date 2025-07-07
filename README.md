@@ -73,10 +73,7 @@ A full-stack Task Manager app with a React frontend, Spring Boot backend, and Ma
   - Implement basic authentication for simple user login
   - Add token-based authentication (JWT) for secure API access
 - Allow users to register and manage their own tasks
-- Add user roles (admin, user) for access control
-- Improve error handling and validation
-- Add notifications or reminders for tasks
-- Enhance UI/UX with more features and polish
+
 
 ---
 
